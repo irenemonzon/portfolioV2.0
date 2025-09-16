@@ -1,4 +1,5 @@
-
+import { motion } from 'framer-motion'
+import type { Variants } from "framer-motion";
 import type { IconType } from "react-icons";
 import {
   SiReact,
@@ -26,23 +27,23 @@ import { getSkillsByCategory } from "../data/portfolio-data";
 
 const brandColors: Record<string, string> = {
   react: "#61DAFB",
-  "next.js": "#000000",
+  "next.js": "#ffffff",
   typescript: "#3178C6",
   javascript: "#F7DF1E",
   "tailwind css": "#06B6D4",
   html5: "#E34F26",
   css3: "#1572B6",
   "node.js": "#339933",
-  "express.js": "#000000",
+  "express.js": "#ffffff",
   graphql: "#E10098",
-  "rest apis": "#000000",
+  "rest apis": "#ffffff",
   postgresql: "#336791",
   mongodb: "#47A248",
   firebase: "#FFCA28",
   pgadmin: "#32648D",
   dbeaver: "#372923",
   git: "#F05032",
-  github: "#181717",
+  github: "#ffffff",
   docker: "#2496ED",
   "ci/cd": "#4A90E2",
   storybook: "#FF4785",
@@ -82,12 +83,12 @@ const SkillIcon = ({ name }: { name: string }) => {
 
   if (!Icon) {
     return (
-      <div
+      <motion.div
         style={{
           width: 48,
           height: 48,
           borderRadius: "8px",
-          backgroundColor: brandColors[key] || "#999",
+          backgroundColor: brandColors[key] || "#4f46e5",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -95,13 +96,30 @@ const SkillIcon = ({ name }: { name: string }) => {
           fontSize: "0.8rem",
           color: "#fff"
         }}
+        whileHover={{ 
+          scale: 1.2,
+          rotate: 5,
+          boxShadow: `0 10px 30px ${brandColors[key] || "#4f46e5"}40`
+        }}
+        transition={{ duration: 0.2 }}
       >
         {name.charAt(0)}
-      </div>
+      </motion.div>
     );
   }
 
-  return <Icon size={48} color={brandColors[key] || "#000"} />;
+  return (
+    <motion.div
+      whileHover={{ 
+        scale: 1.2,
+        rotate: [0, 5, -5, 0],
+        filter: "drop-shadow(0 10px 20px rgba(255, 255, 255, 0.1))"
+      }}
+      transition={{ duration: 0.2 }}
+    >
+      <Icon size={48} color={brandColors[key] || "#ffffff"} />
+    </motion.div>
+  );
 };
 
 export default function Skills() {
@@ -112,61 +130,164 @@ export default function Skills() {
     { title: "Tools & Testing", skills: getSkillsByCategory("Tools") }
   ];
 
+  const containerVariants: Variants  = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants: Variants  = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const skillItemVariants: Variants  = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section id="skills" className="py-20 bg-gray-50">
+    <section id="skills" className="py-20 bg-slate-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-white mb-4"
+              variants={cardVariants}
+            >
               Skills & Expertise
-            </h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.div 
+              className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-4"
+              variants={cardVariants}
+              whileInView={{ width: [0, 80] }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            />
+            <motion.p 
+              className="text-gray-300 max-w-2xl mx-auto"
+              variants={cardVariants}
+            >
               Technologies and tools I work with to create amazing digital experiences
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
             {skillCategories.map((category, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-6 text-center">
+              <motion.div 
+                key={i} 
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-2xl p-6"
+                variants={cardVariants}
+                whileHover={{ 
+                  y: -5,
+                  boxShadow: "0 25px 50px rgba(59, 130, 246, 0.1)"
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.h3 
+                  className="text-xl font-semibold text-white mb-6 text-center"
+                  whileHover={{ 
+                    color: "#60a5fa",
+                    scale: 1.05
+                  }}
+                >
                   {category.title}
-                </h3>
+                </motion.h3>
                 <div className="grid grid-cols-2 gap-4">
                   {category.skills.map((skill, j) => (
-                    <div
+                    <motion.div
                       key={j}
-                      className="flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                      className="flex flex-col items-center p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600/30"
+                      variants={skillItemVariants}
+                      whileHover={{ 
+                        scale: 1.05,
+                        backgroundColor: "rgba(30, 41, 59, 0.7)",
+                        borderColor: "rgba(59, 130, 246, 0.3)"
+                      }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <div className="group-hover:scale-110 transition-transform duration-300 mb-3">
+                      <div className="mb-3">
                         <SkillIcon name={skill.name} />
                       </div>
-                      <span className="text-sm font-medium text-gray-700 text-center leading-tight">
+                      <motion.span 
+                        className="text-sm font-medium text-gray-300 text-center leading-tight"
+                        whileHover={{ color: "#ffffff" }}
+                      >
                         {skill.name}
-                      </span>
-                    </div>
+                      </motion.span>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Soft Skills */}
-          <div className="mt-16 text-center">
-            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+          <motion.div 
+            className="mt-16 text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            <motion.h3 
+              className="text-xl font-semibold text-white mb-6"
+              variants={cardVariants}
+            >
               Soft Skills & Methodologies
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3">
+            </motion.h3>
+            <motion.div 
+              className="flex flex-wrap justify-center gap-3"
+              variants={containerVariants}
+            >
               {getSkillsByCategory("Soft Skills").map((skill, i) => (
-                <span
+                <motion.span
                   key={i}
-                  className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                  className="px-4 py-2 bg-slate-700/30 border border-slate-600/30 rounded-full text-sm text-gray-300 backdrop-blur-sm"
+                  variants={skillItemVariants}
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: "rgba(59, 130, 246, 0.2)",
+                    borderColor: "rgba(59, 130, 246, 0.4)",
+                    color: "#ffffff"
+                  }}
+                  transition={{ duration: 0.2 }}
                 >
                   {skill.name}
-                </span>
+                </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

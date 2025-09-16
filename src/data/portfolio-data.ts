@@ -18,15 +18,17 @@ export interface Skill {
 }
 
 export interface Project {
-  id: string
+  id: number
   title: string
   description: string
   longDescription?: string
   technologies: string[]
   githubUrl?: string
   liveUrl?: string
-  imageUrl?: string
-  featured: boolean
+  image?: string
+  features: string[]
+  adminUrl?:string
+  ordersUrl?:string
 }
 
 export interface ContactInfo {
@@ -37,13 +39,13 @@ export interface ContactInfo {
 
 export const portfolioData = {
   personal: {
-    name: "Irene Monzon",
-    title: "Full Stack Developer",
-    description: "Full Stack Developer specializing in modern web technologies like React, Next.js, and TypeScript",
-    initials: "IM",
-    profileImage: "", 
+      name: "Irene Monzon",
+      title: "Frontend Developer",
+      description:
+        "Frontend Developer creating modern, responsive, and user-friendly web applications with React, Next.js, JavaScript and TypeScript.",
+      initials: "IM",
+      profileImage: "", // Add your image URL here
   } as PersonalInfo,
-
   socialLinks: [
     {
       platform: "GitHub",
@@ -96,50 +98,67 @@ export const portfolioData = {
 
   projects: [
     {
-      id: "project-1",
+      id: 1,
       title: "E-commerce Platform",
-      description: "A modern e-commerce platform built with Next.js and TypeScript",
-      longDescription: "Full-featured e-commerce platform with user authentication, product catalog, shopping cart, and payment integration. Built with modern technologies focusing on performance and user experience.",
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"],
-      githubUrl: "https://github.com/yourusername/project1", 
-      liveUrl: "https://yourproject1.com",
-      imageUrl: "",
-      featured: true,
+      description: "A full-featured e-commerce application built with Next.js and Tailwind CSS. Features include product catalog, shopping cart, user authentication, and responsive design with ShadCN UI components.",
+      image: "/api/placeholder/400/250",
+      technologies: ["Next.js", "Tailwind CSS", "ShadCN", "TypeScript", "React"],
+      liveUrl: "https://next-js-eccomerce-woad.vercel.app/",
+      githubUrl: "#",
+      features: [
+        "Product catalog with search and filtering",
+        "Shopping cart functionality",
+        "Responsive design",
+        "Modern UI with ShadCN components"
+      ]
     },
     {
-      id: "project-2", 
-      title: "Task Management Dashboard",
-      description: "A collaborative task management application",
-      longDescription: "Real-time task management dashboard with team collaboration features, drag-and-drop interface, and progress tracking.",
-      technologies: ["React", "TypeScript", "Node.js", "Socket.io"],
-      githubUrl: "https://github.com/yourusername/project2",
-      liveUrl: "https://yourproject2.com",
-      imageUrl: "",
-      featured: true,
+      id: 2,
+      title: "Coffee Shop Management System",
+      description: "A comprehensive restaurant/coffee shop application with order management, admin panel, and customer interface. Built with modern Next.js features including Server Actions and App Router.",
+      image: "/api/placeholder/400/250",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Zustand", "Zod"],
+      liveUrl: "https://restaurant-shop.vercel.app/",
+      adminUrl: "https://restaurant-shop.vercel.app/admin/orders",
+      ordersUrl: "https://restaurant-shop.vercel.app/orders",
+      githubUrl: "#",
+      features: [
+        "Order management system",
+        "Admin dashboard for order tracking",
+        "Customer order interface",
+        "Real-time order status updates",
+        "Database integration with Prisma"
+      ]
     },
     {
-      id: "project-3",
-      title: "Restaurant Website",
-      description: "Modern restaurant website with online ordering",
-      longDescription: "Responsive restaurant website featuring menu display, online ordering system, and table reservations.",
-      technologies: ["React", "Tailwind CSS", "Node.js", "Express"],
-      githubUrl: "https://github.com/yourusername/project3", 
-      liveUrl: "",
-      imageUrl: "",
-      featured: false,
+      id: 3,
+      title: "Restaurant Management Dashboard",
+      description: "Advanced restaurant management system with comprehensive order tracking, inventory management, and analytics. Features a modern admin interface built with cutting-edge technologies.",
+      image: "/api/placeholder/400/250",
+      technologies: ["Next.js", "Server Actions", "App Router", "Prisma", "PostgreSQL"],
+      liveUrl: "#",
+      githubUrl: "#",
+      features: [
+        "Advanced order tracking",
+        "Inventory management",
+        "Analytics and reporting",
+        "Modern admin interface",
+        "Database optimization"
+      ]
     }
-  ] as Project[],
-
+  ]as Project[],
   contact: {
     email: "irene.monzonm@gmail.com", 
     phone: "+1 (555) 123-4567", 
   } as ContactInfo,
 
   about: {
-    intro: "I'm a passionate full-stack developer with expertise in modern web technologies. I love building applications that solve real-world problems and provide great user experiences.",
-    background: "With experience in React, Next.js, TypeScript, and various backend technologies, I enjoy working on both the frontend and backend aspects of web development. I'm always eager to learn new technologies and take on challenging projects.",
-    interests: ["Web Development", "Open Source", "Continuous Learning", "Problem Solving"]
-  }
+  intro:
+    "I'm a Frontend Developer with +5 years of experience building fast, high-quality websites and web apps. I work with modern tools like React, Next.js, JavaScript and TypeScript to create clean, responsive, and easy-to-use interfaces.",
+  background:
+    "My experience spans from developing intuitive, accessible frontends to collaborating on backend integrations using Node.js, Express, and databases like PostgreSQL, MongoDB, and Firebase. I’m passionate about writing maintainable code, optimizing user experience, and continuously learning to stay at the forefront of web development trends.",
+  interests: ["Web Development", "UI/UX Design", "Continuous Learning", "Problem Solving"],
+}
 }
 
 export const getSkillsByCategory = (category: Skill['category']) => {
@@ -147,7 +166,7 @@ export const getSkillsByCategory = (category: Skill['category']) => {
 }
 
 export const getFeaturedProjects = () => {
-  return portfolioData.projects.filter(project => project.featured)
+  return portfolioData.projects.filter(project => project.features)
 }
 
 export const getSocialLinkByPlatform = (platform: string) => {

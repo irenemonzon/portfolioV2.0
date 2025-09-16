@@ -1,76 +1,202 @@
+import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import { portfolioData, getSkillsByCategory } from '../data/portfolio-data'
 
 const About = () => {
-  const { personal, about } = portfolioData
+  const { about } = portfolioData
   const frontendSkills = getSkillsByCategory('Frontend')
   const backendSkills = getSkillsByCategory('Backend')
   const softSkills = getSkillsByCategory('Soft Skills')
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6
+      }
+    }
+  }
+
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-slate-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">About Me</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
-          </div>
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-white mb-4"
+              variants={itemVariants}
+            >
+              This is me
+            </motion.h2>
+            <motion.div 
+              className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"
+              variants={itemVariants}
+              initial={{ width: 0 }}
+              whileInView={{ width: 80 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            />
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              {personal.profileImage ? (
-                <img 
-                  src={personal.profileImage} 
-                  alt={personal.name}
-                  className="w-64 h-64 rounded-lg mx-auto mb-8 md:mb-0 object-cover"
-                />
-              ) : (
-                <div className="w-64 h-64 bg-gray-300 rounded-lg mx-auto mb-8 md:mb-0 flex items-center justify-center">
-                  <span className="text-6xl text-gray-600">Photo</span>
-                </div>
-              )}
-            </div>
+          <motion.div 
+            className="space-y-6 text-center md:text-left"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={containerVariants}
+          >
+            <motion.p 
+              className="text-gray-300 leading-relaxed text-lg"
+              variants={itemVariants}
+              whileHover={{ color: "#ffffff" }}
+              transition={{ duration: 0.2 }}
+            >
+              {about.intro}
+            </motion.p>
 
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-gray-800">
-                {personal.title}
-              </h3>
-              
-              <p className="text-gray-600 leading-relaxed">
-                {about.intro}
-              </p>
-              
-              <p className="text-gray-600 leading-relaxed">
-                {about.background}
-              </p>
+            <motion.p 
+              className="text-gray-300 leading-relaxed text-lg"
+              variants={itemVariants}
+              whileHover={{ color: "#ffffff" }}
+              transition={{ duration: 0.2 }}
+            >
+              {about.background}
+            </motion.p>
 
-              <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-gray-800">Frontend</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {frontendSkills.slice(0, 4).map((skill) => (
-                      <li key={skill.name}>• {skill.name}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-gray-800">Backend</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {backendSkills.slice(0, 4).map((skill) => (
-                      <li key={skill.name}>• {skill.name}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <motion.div 
+              className="grid grid-cols-2 gap-4 pt-4"
+              variants={itemVariants}
+            >
+              <motion.div 
+                className="space-y-2 p-4 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                whileHover={{ 
+                  scale: 1.02,
+                  backgroundColor: "rgba(30, 41, 59, 0.5)",
+                  borderColor: "rgba(59, 130, 246, 0.3)"
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.h4 
+                  className="font-semibold text-blue-400"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Frontend
+                </motion.h4>
+                <motion.ul 
+                  className="text-sm text-gray-400 space-y-1"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.05
+                      }
+                    }
+                  }}
+                >
+                  {frontendSkills.slice(0, 4).map((skill) => (
+                    <motion.li 
+                      key={skill.name}
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 }
+                      }}
+                      whileHover={{ 
+                        x: 5,
+                        color: "#60a5fa"
+                      }}
+                    >
+                      • {skill.name}
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
 
-              <div className="flex flex-wrap gap-3 pt-4">
-                {softSkills.map((skill) => (
-                  <span key={skill.name} className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">
-                    {skill.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+              <motion.div 
+                className="space-y-2 p-4 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                whileHover={{ 
+                  scale: 1.02,
+                  backgroundColor: "rgba(30, 41, 59, 0.5)",
+                  borderColor: "rgba(147, 51, 234, 0.3)"
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.h4 
+                  className="font-semibold text-purple-400"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Backend
+                </motion.h4>
+                <motion.ul 
+                  className="text-sm text-gray-400 space-y-1"
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.05
+                      }
+                    }
+                  }}
+                >
+                  {backendSkills.slice(0, 4).map((skill) => (
+                    <motion.li 
+                      key={skill.name}
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 }
+                      }}
+                      whileHover={{ 
+                        x: 5,
+                        color: "#a855f7"
+                      }}
+                    >
+                      • {skill.name}
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              className="flex flex-wrap gap-3 pt-4 justify-center md:justify-start"
+              variants={itemVariants}
+            >
+              {softSkills.map((skill, index) => (
+                <motion.span
+                  key={skill.name}
+                  className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    backgroundColor: "rgba(59, 130, 246, 0.3)",
+                    borderColor: "rgba(59, 130, 246, 0.5)",
+                    color: "#ffffff"
+                  }}
+                >
+                  {skill.name}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

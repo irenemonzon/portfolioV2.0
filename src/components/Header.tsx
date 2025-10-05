@@ -56,65 +56,57 @@ const Header = () => {
     <motion.header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-slate-700/50' 
-          : 'bg-transparent'
+          ? 'bg-slate-900/90 backdrop-blur-md border-b border-slate-700/30' 
+          : 'bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50'
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <nav className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
           <motion.div 
             className="flex-shrink-0"
             whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <motion.button 
               onClick={() => scrollToSection('hero')}
-              className="text-xl font-bold text-white hover:text-blue-400 transition-colors duration-300"
-              whileHover={{ 
-                textShadow: "0 0 10px rgba(96, 165, 250, 0.5)" 
-              }}
+              className="text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-cyan-300 transition-all duration-300"
             >
               Irene Monzon
             </motion.button>
           </motion.div>
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 relative"
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    y: -2
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                </motion.button>
-              ))}
-            </div>
+          <div className="flex items-center space-x-8">
+            {navItems.map((item) => (
+              <motion.button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-slate-300 hover:text-white px-3 py-2 text-base font-medium transition-colors duration-300 relative group"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 1 }}
+                whileHover={{ y: -2 }}
+              >
+                {item.name}
+                {/* Underline effect matching Figma */}
+                <motion.span 
+                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 origin-left"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                />
+              </motion.button>
+            ))}
           </div>
+
           <motion.div 
             className="md:hidden"
             whileTap={{ scale: 0.95 }}
           >
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-blue-400 focus:outline-none p-2"
+              className="text-slate-300 hover:text-blue-400 focus:outline-none p-2 rounded-md"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
@@ -142,7 +134,7 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50"
+              className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg overflow-hidden"
               variants={menuVariants}
               initial="closed"
               animate="open"
@@ -153,21 +145,19 @@ const Header = () => {
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="text-gray-300 hover:text-blue-400 hover:bg-slate-800/50 block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-all duration-300"
+                    className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-4 py-3 rounded-md text-base font-medium w-full text-left transition-all duration-300 relative group"
                     variants={itemVariants}
                     whileHover={{ 
-                      x: 10,
+                      x: 8,
                       backgroundColor: "rgba(30, 41, 59, 0.5)"
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <motion.div
                       className="flex items-center"
-                      whileHover={{ x: 5 }}
                     >
                       <motion.div
-                        className="w-2 h-2 rounded-full bg-blue-400 mr-3 opacity-0"
-                        whileHover={{ opacity: 1 }}
+                        className="w-2 h-2 rounded-full bg-blue-400 mr-3 opacity-0 group-hover:opacity-100"
                         transition={{ duration: 0.2 }}
                       />
                       {item.name}

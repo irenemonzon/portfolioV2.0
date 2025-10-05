@@ -44,7 +44,7 @@ export const portfolioData = {
       description:
         "Frontend Developer creating modern, responsive, and user-friendly web applications with React, Next.js, JavaScript and TypeScript.",
       initials: "IM",
-      profileImage: "", // Add your image URL here
+      profileImage: "./profile.png",
   } as PersonalInfo,
   socialLinks: [
     {

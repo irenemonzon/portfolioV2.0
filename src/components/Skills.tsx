@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import type { Variants } from "framer-motion";
 import type { IconType } from "react-icons";
 import {
   SiReact,
@@ -24,6 +23,8 @@ import {
   SiPostman
 } from "react-icons/si";
 import { getSkillsByCategory } from "../data/portfolio-data";
+import SectionHeader from './ui/SectionHeader'
+import { containerVariants, cardVariants, scaleVariants } from './ui/animations'
 
 const brandColors: Record<string, string> = {
   react: "#61DAFB",
@@ -130,71 +131,15 @@ export default function Skills() {
     { title: "Tools & Testing", skills: getSkillsByCategory("Tools") }
   ];
 
-  const containerVariants: Variants  = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants: Variants  = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const skillItemVariants: Variants  = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut"
-      }
-    }
-  };
 
   return (
     <section id="skills" className="py-20 bg-slate-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-white mb-4"
-              variants={cardVariants}
-            >
-              Skills & Expertise
-            </motion.h2>
-            <motion.div 
-              className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-4"
-              variants={cardVariants}
-              whileInView={{ width: [0, 80] }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-            <motion.p 
-              className="text-gray-300 max-w-2xl mx-auto"
-              variants={cardVariants}
-            >
-              Technologies and tools I work with to create amazing digital experiences
-            </motion.p>
-          </motion.div>
+          <SectionHeader 
+            title="Skills & Expertise"
+            subtitle="Technologies and tools I work with to create amazing digital experiences"
+          />
 
           <motion.div 
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -228,7 +173,7 @@ export default function Skills() {
                     <motion.div
                       key={j}
                       className="flex flex-col items-center p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600/30"
-                      variants={skillItemVariants}
+                      variants={scaleVariants}
                       whileHover={{ 
                         scale: 1.05,
                         backgroundColor: "rgba(30, 41, 59, 0.7)",
@@ -274,7 +219,7 @@ export default function Skills() {
                 <motion.span
                   key={i}
                   className="px-4 py-2 bg-slate-700/30 border border-slate-600/30 rounded-full text-sm text-gray-300 backdrop-blur-sm"
-                  variants={skillItemVariants}
+                  variants={scaleVariants}
                   whileHover={{ 
                     scale: 1.05,
                     backgroundColor: "rgba(59, 130, 246, 0.2)",

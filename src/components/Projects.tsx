@@ -1,64 +1,21 @@
 import { motion } from 'framer-motion'
-import type { Variants } from "framer-motion";
-import { portfolioData } from '../data/portfolio-data';
+import { portfolioData } from '../data/portfolio-data'
+import SectionHeader from './ui/SectionHeader'
+import Button from './ui/Button'
+import { containerVariants, cardVariants, scaleVariants, staggerContainer } from './ui/animations'
+import { scrollToSection } from '../utils/common'
 
 const Projects = () => {
   const {projects}=portfolioData
-  
-
-  const containerVariants: Variants  = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const cardVariants: Variants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  }
 
   return (
     <section id="projects" className="py-20 bg-slate-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-white mb-4"
-              variants={cardVariants}
-            >
-              Featured Projects
-            </motion.h2>
-            <motion.div 
-              className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mb-4"
-              variants={cardVariants}
-              whileInView={{ width: [0, 80] }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-            <motion.p 
-              className="text-gray-300 max-w-2xl mx-auto"
-              variants={cardVariants}
-            >
-              Here are some of my recent projects that showcase my skills in full-stack development
-            </motion.p>
-          </motion.div>
+          <SectionHeader 
+            title="Featured Projects"
+            subtitle="Here are some of my recent projects that showcase my skills in full-stack development"
+          />
 
           <motion.div 
             className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8"
@@ -122,23 +79,13 @@ const Projects = () => {
                     className="flex flex-wrap gap-2 mb-4"
                     initial="hidden"
                     whileInView="visible"
-                    variants={{
-                      hidden: {},
-                      visible: {
-                        transition: {
-                          staggerChildren: 0.05
-                        }
-                      }
-                    }}
+                    variants={staggerContainer}
                   >
                     {project.technologies.map((tech, index) => (
                       <motion.span
                         key={index}
                         className="px-2 py-1 bg-slate-700/50 text-gray-300 text-xs rounded-md border border-slate-600/30"
-                        variants={{
-                          hidden: { opacity: 0, scale: 0.8 },
-                          visible: { opacity: 1, scale: 1 }
-                        }}
+                        variants={scaleVariants}
                         whileHover={{ 
                           scale: 1.05,
                           backgroundColor: "rgba(59, 130, 246, 0.2)",
@@ -254,22 +201,14 @@ const Projects = () => {
             >
               Want to see more projects or discuss a collaboration?
             </motion.p>
-            <motion.button
-              onClick={() => {
-                const element = document.getElementById('contact')
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 15px 40px rgba(59, 130, 246, 0.3)"
-              }}
-              whileTap={{ scale: 0.95 }}
+            <Button
+              onClick={() => scrollToSection('contact')}
+              variant="secondary"
+              size="md"
+              className="rounded-lg"
             >
               Get In Touch
-            </motion.button>
+            </Button>
           </motion.div>
         </div>
       </div>

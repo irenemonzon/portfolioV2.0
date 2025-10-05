@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import Button from './ui/Button'
+import SocialIcons from './ui/SocialIcons'
+import { scrollToSection } from '../utils/common'
 
 const Hero = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   const containerVariants: Variants  = {
     hidden: { opacity: 0 },
@@ -33,18 +30,6 @@ const Hero = () => {
     },
   };
 
-  const avatarVariants: Variants  = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 1,
-        type: "spring",
-        stiffness: 200,
-      },
-    },
-  };
 
   return (
     <section
@@ -89,7 +74,7 @@ const Hero = () => {
           animate="visible"
         >
          
-          <motion.div className="mb-8 mt-12" variants={avatarVariants}>
+          <motion.div className="mb-8 mt-12" variants={itemVariants}>
             <div className="relative mx-auto w-40 h-40 mb-8">
             
               <motion.div
@@ -103,12 +88,10 @@ const Hero = () => {
               />
 
               <div className="absolute inset-1 rounded-full flex items-center justify-center">
-                <motion.img
+                <img
                   className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 w-36 h-36 object-cover rounded-full"
                   src='./profile.png'
                   alt="Profile Photo"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
                 />
               </div>
             </div>
@@ -140,70 +123,31 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
             variants={itemVariants}
           >
-            <motion.button
+            <Button
               onClick={() => scrollToSection("projects")}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-10 rounded-full transition-all duration-300 shadow-lg text-lg"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 20px 40px rgba(147, 51, 234, 0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
+              variant="primary"
+              size="lg"
             >
               View My Work
-            </motion.button>
-            <motion.button
+            </Button>
+            <Button
               onClick={() => scrollToSection("contact")}
-              className="border-2 border-slate-400 text-slate-300 hover:bg-slate-800/50 hover:text-white hover:border-white font-semibold py-4 px-10 rounded-full transition-all duration-300 text-lg"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 30px rgba(148, 163, 184, 0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
+              variant="outline"
+              size="lg"
             >
               Get In Touch
-            </motion.button>
+            </Button>
           </motion.div>
 
           <motion.div
-            className="flex justify-center space-x-8 mb-20"
+            className="flex justify-center mb-20"
             variants={itemVariants}
           >
-            {[
-              {
-                icon: Github,
-                href: "https://github.com/irenemonzon",
-                color: "hover:text-white",
-                label: "GitHub",
-              },
-              {
-                icon: Linkedin,
-                href: "https://linkedin.com/in/monzonirene",
-                color: "hover:text-blue-400",
-                label: "LinkedIn",
-              },
-              {
-                icon: Mail,
-                href: "mailto:irene.monzonm@gmail.com",
-                color: "hover:text-purple-400",
-                label: "Email",
-              },
-            ].map(({ icon: Icon, href, color, label }, index) => (
-              <motion.a
-                key={index}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`text-slate-400 ${color} transition-all duration-300 p-4 rounded-full hover:bg-slate-800/30`}
-                whileHover={{
-                  scale: 1.3,
-                  y: -5,
-                }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={label}
-              >
-                <Icon size={28} />
-              </motion.a>
-            ))}
+            <SocialIcons 
+              variant="hero" 
+              className="space-x-8"
+              animated={true}
+            />
           </motion.div>
         </motion.div>
       </div>

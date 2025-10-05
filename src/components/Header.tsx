@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { scrollToSection, navigationItems } from '../utils/common'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -13,21 +14,10 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMenuOpen(false)
-    }
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId)
+    setIsMenuOpen(false)
   }
-
-  const navItems = [
-    { name: 'Home', id: 'hero' },
-    { name: 'About', id: 'about' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Contact', id: 'contact' }
-  ]
 
   const menuVariants = {
     closed: {
@@ -71,18 +61,18 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <motion.button 
-              onClick={() => scrollToSection('hero')}
+              onClick={() => handleNavClick('hero')}
               className="text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-cyan-300 transition-all duration-300"
             >
               Irene Monzon
             </motion.button>
           </motion.div>
 
-          <div className="flex items-center space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden md:flex items-center space-x-8">
+            {navigationItems.map((item) => (
               <motion.button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavClick(item.id)}
                 className="text-slate-300 hover:text-white px-3 py-2 text-base font-medium transition-colors duration-300 relative group"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
@@ -101,14 +91,15 @@ const Header = () => {
           </div>
 
           <motion.div 
-            className="md:hidden"
+            className="md:hidden flex items-center"
             whileTap={{ scale: 0.95 }}
           >
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-slate-300 hover:text-blue-400 focus:outline-none p-2 rounded-md"
+              className="text-slate-300 hover:text-blue-400 focus:outline-none p-2 rounded-md border border-slate-600/30 hover:border-blue-400/50 transition-all duration-300"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
+              aria-label="Toggle mobile menu"
             >
               <motion.svg
                 className="h-6 w-6"
@@ -133,19 +124,47 @@ const Header = () => {
         </div>
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg overflow-hidden"
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                {navItems.map((item) => (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMenuOpen(false)}
+              />
+              
+              {/* Mobile Menu */}
+              <motion.div
+                className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg overflow-hidden min-h-screen sm:min-h-fit z-50"
+                variants={menuVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+              <div className="px-4 pt-4 pb-6">
+                {/* Mobile Menu Header */}
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700/50">
+                  <span className="text-lg font-semibold text-white">Navigation</span>
+                  <motion.button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-slate-400 hover:text-white p-2 rounded-md transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </motion.button>
+                </div>
+                
+                {/* Navigation Items */}
+                <div className="space-y-2">
+                {navigationItems.map((item) => (
                   <motion.button
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-4 py-3 rounded-md text-base font-medium w-full text-left transition-all duration-300 relative group"
+                    onClick={() => handleNavClick(item.id)}
+                    className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-6 py-4 rounded-lg text-lg font-medium w-full text-left transition-all duration-300 relative group border border-transparent hover:border-slate-600/50"
                     variants={itemVariants}
                     whileHover={{ 
                       x: 8,
@@ -164,8 +183,10 @@ const Header = () => {
                     </motion.div>
                   </motion.button>
                 ))}
+                </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>

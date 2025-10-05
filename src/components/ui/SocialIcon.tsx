@@ -1,19 +1,57 @@
+import { motion } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 import type { SocialLink } from '../../data/portfolio-data'
 
 interface SocialIconProps {
   social: SocialLink
   className?: string
   size?: 'sm' | 'md' | 'lg'
+  variant?: 'default' | 'hero' | 'footer'
+  animated?: boolean
 }
 
-const SocialIcon = ({ social, className = "", size = 'md' }: SocialIconProps) => {
+const socialVariants: Variants = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  }
+}
+
+const SocialIcon = ({ 
+  social, 
+  className = "", 
+  size = 'md', 
+  variant = 'default',
+  animated = false 
+}: SocialIconProps) => {
   const sizeClasses = {
     sm: 'w-5 h-5',
     md: 'w-6 h-6', 
     lg: 'w-8 h-8'
   }
 
+  const variantClasses = {
+    default: 'text-gray-600 hover:text-blue-600 transition-colors',
+    hero: 'text-slate-400 hover:text-blue-400 transition-all duration-300 p-4 rounded-full hover:bg-slate-800/30',
+    footer: 'text-gray-400 hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-slate-800/50'
+  }
+
   const iconSize = sizeClasses[size]
+  const variantClass = variantClasses[variant]
+
+  const getHoverColor = () => {
+    switch (social.icon) {
+      case 'github': return 'hover:text-white'
+      case 'linkedin': return 'hover:text-blue-400'
+      case 'email': return 'hover:text-purple-400'
+      default: return 'hover:text-blue-400'
+    }
+  }
 
   const renderIcon = () => {
     switch (social.icon) {
@@ -44,7 +82,7 @@ const SocialIcon = ({ social, className = "", size = 'md' }: SocialIconProps) =>
       case 'website':
         return (
           <svg className={iconSize} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9 3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
         )
       default:
@@ -56,16 +94,29 @@ const SocialIcon = ({ social, className = "", size = 'md' }: SocialIconProps) =>
     }
   }
 
+  const Component = animated ? motion.a : 'a'
+  const motionProps = animated ? {
+    variants: socialVariants,
+    whileHover: { 
+      scale: variant === 'hero' ? 1.3 : 1.2,
+      y: variant === 'hero' ? -5 : 0,
+      rotate: variant === 'footer' ? (social.icon === 'linkedin' ? -5 : 5) : 0,
+      boxShadow: "0 5px 20px rgba(59, 130, 246, 0.3)"
+    },
+    whileTap: { scale: variant === 'hero' ? 0.9 : 0.9 }
+  } : {}
+
   return (
-    <a
+    <Component
       href={social.url}
       target={social.icon === 'email' ? undefined : "_blank"}
       rel={social.icon === 'email' ? undefined : "noopener noreferrer"}
-      className={`text-gray-600 hover:text-blue-600 transition-colors ${className}`}
+      className={`${variantClass} ${variant === 'hero' ? getHoverColor() : ''} ${className}`}
       aria-label={`${social.platform} link`}
+      {...motionProps}
     >
       {renderIcon()}
-    </a>
+    </Component>
   )
 }
 

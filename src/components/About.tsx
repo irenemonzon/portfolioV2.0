@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import type { Variants } from 'framer-motion'
 import { portfolioData, getSkillsByCategory } from '../data/portfolio-data'
+import SectionHeader from './ui/SectionHeader'
+import { containerVariants, itemVariants } from './ui/animations'
 
 const About = () => {
   const { about } = portfolioData
@@ -8,53 +9,13 @@ const About = () => {
   const backendSkills = getSkillsByCategory('Backend')
   const softSkills = getSkillsByCategory('Soft Skills')
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6
-      }
-    }
-  }
-
   return (
     <section id="about" className="py-20 bg-slate-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-white mb-4"
-              variants={itemVariants}
-            >
-              This is me
-            </motion.h2>
-            <motion.div 
-              className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto"
-              variants={itemVariants}
-              initial={{ width: 0 }}
-              whileInView={{ width: 80 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-          </motion.div>
+          <SectionHeader 
+            title="This is me"
+          />
 
           <motion.div 
             className="space-y-6 text-center md:text-left"

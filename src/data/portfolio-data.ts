@@ -104,7 +104,7 @@ export const portfolioData = {
       image: "/api/placeholder/400/250",
       technologies: ["Next.js", "Tailwind CSS", "ShadCN", "TypeScript", "React"],
       liveUrl: "https://next-js-eccomerce-woad.vercel.app/",
-      githubUrl: "#",
+      githubUrl: "https://github.com/irenemonzon/Next.js_Eccomerce",
       features: [
         "Product catalog with search and filtering",
         "Shopping cart functionality",
@@ -119,9 +119,7 @@ export const portfolioData = {
       image: "/api/placeholder/400/250",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Zustand", "Zod"],
       liveUrl: "https://restaurant-shop.vercel.app/",
-      adminUrl: "https://restaurant-shop.vercel.app/admin/orders",
-      ordersUrl: "https://restaurant-shop.vercel.app/orders",
-      githubUrl: "#",
+      githubUrl: "https://github.com/irenemonzon/Restaurant-shop",
       features: [
         "Order management system",
         "Admin dashboard for order tracking",
@@ -132,12 +130,12 @@ export const portfolioData = {
     },
     {
       id: 3,
-      title: "Restaurant Management Dashboard",
-      description: "Advanced restaurant management system with comprehensive order tracking, inventory management, and analytics. Features a modern admin interface built with cutting-edge technologies.",
+      title: "Fitness Club Landing Page",
+      description: "A modern, responsive landing page designed for fitness clubs, showcasing amenities and services to attract new members and keep existing ones engaged.",
       image: "/api/placeholder/400/250",
-      technologies: ["Next.js", "Server Actions", "App Router", "Prisma", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+      technologies: ["JavaScript", "CSS", "Responsive", "HTML"],
+      liveUrl: "https://irenemonzon.github.io/FitnessClub/",
+      githubUrl: "https://github.com/irenemonzon/FitnessClub",
       features: [
         "Advanced order tracking",
         "Inventory management",
@@ -149,7 +147,6 @@ export const portfolioData = {
   ]as Project[],
   contact: {
     email: "irene.monzonm@gmail.com", 
-    phone: "+1 (555) 123-4567", 
   } as ContactInfo,
 
   about: {
@@ -157,7 +154,7 @@ export const portfolioData = {
     "I'm a Frontend Developer with +5 years of experience building fast, high-quality websites and web apps. I work with modern tools like React, Next.js, JavaScript and TypeScript to create clean, responsive, and easy-to-use interfaces.",
   background:
     "My experience spans from developing intuitive, accessible frontends to collaborating on backend integrations using Node.js, Express, and databases like PostgreSQL, MongoDB, and Firebase. I’m passionate about writing maintainable code, optimizing user experience, and continuously learning to stay at the forefront of web development trends.",
-  interests: ["Web Development", "UI/UX Design", "Continuous Learning", "Problem Solving"],
+  interests: ["Web Development", "FullStack", "Continuous Learning", "Problem Solving"],
 }
 }
 

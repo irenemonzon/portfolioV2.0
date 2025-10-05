@@ -43,11 +43,11 @@ const About = () => {
             </motion.p>
 
             <motion.div 
-              className="grid grid-cols-2 gap-4 pt-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6"
               variants={itemVariants}
             >
               <motion.div 
-                className="space-y-2 p-4 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                className="space-y-3 p-5 rounded-lg bg-slate-700/30 border border-slate-600/30"
                 whileHover={{ 
                   scale: 1.02,
                   backgroundColor: "rgba(30, 41, 59, 0.5)",
@@ -56,13 +56,13 @@ const About = () => {
                 transition={{ duration: 0.2 }}
               >
                 <motion.h4 
-                  className="font-semibold text-blue-400"
+                  className="font-semibold text-blue-400 text-lg mb-3"
                   whileHover={{ scale: 1.05 }}
                 >
-                  Frontend
+                  Frontend Development
                 </motion.h4>
-                <motion.ul 
-                  className="text-sm text-gray-400 space-y-1"
+                <motion.div 
+                  className="flex flex-wrap gap-2"
                   variants={{
                     hidden: {},
                     visible: {
@@ -72,26 +72,29 @@ const About = () => {
                     }
                   }}
                 >
-                  {frontendSkills.slice(0, 4).map((skill) => (
-                    <motion.li 
+                  {frontendSkills.map((skill) => (
+                    <motion.span
                       key={skill.name}
+                      className="px-3 py-1.5 bg-blue-500/20 text-blue-300 rounded-md text-sm border border-blue-500/30"
                       variants={{
-                        hidden: { opacity: 0, x: -20 },
-                        visible: { opacity: 1, x: 0 }
+                        hidden: { opacity: 0, scale: 0.8 },
+                        visible: { opacity: 1, scale: 1 }
                       }}
                       whileHover={{ 
-                        x: 5,
-                        color: "#60a5fa"
+                        scale: 1.05,
+                        backgroundColor: "rgba(59, 130, 246, 0.3)",
+                        borderColor: "rgba(59, 130, 246, 0.5)",
+                        color: "#ffffff"
                       }}
                     >
-                      • {skill.name}
-                    </motion.li>
+                      {skill.name}
+                    </motion.span>
                   ))}
-                </motion.ul>
+                </motion.div>
               </motion.div>
 
               <motion.div 
-                className="space-y-2 p-4 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                className="space-y-3 p-5 rounded-lg bg-slate-700/30 border border-slate-600/30"
                 whileHover={{ 
                   scale: 1.02,
                   backgroundColor: "rgba(30, 41, 59, 0.5)",
@@ -100,13 +103,13 @@ const About = () => {
                 transition={{ duration: 0.2 }}
               >
                 <motion.h4 
-                  className="font-semibold text-purple-400"
+                  className="font-semibold text-purple-400 text-lg mb-3"
                   whileHover={{ scale: 1.05 }}
                 >
-                  Backend
+                  Backend Development
                 </motion.h4>
-                <motion.ul 
-                  className="text-sm text-gray-400 space-y-1"
+                <motion.div 
+                  className="flex flex-wrap gap-2"
                   variants={{
                     hidden: {},
                     visible: {
@@ -116,46 +119,67 @@ const About = () => {
                     }
                   }}
                 >
-                  {backendSkills.slice(0, 4).map((skill) => (
-                    <motion.li 
+                  {backendSkills.map((skill) => (
+                    <motion.span
                       key={skill.name}
+                      className="px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-md text-sm border border-purple-500/30"
                       variants={{
-                        hidden: { opacity: 0, x: -20 },
-                        visible: { opacity: 1, x: 0 }
+                        hidden: { opacity: 0, scale: 0.8 },
+                        visible: { opacity: 1, scale: 1 }
                       }}
                       whileHover={{ 
-                        x: 5,
-                        color: "#a855f7"
+                        scale: 1.05,
+                        backgroundColor: "rgba(147, 51, 234, 0.3)",
+                        borderColor: "rgba(147, 51, 234, 0.5)",
+                        color: "#ffffff"
                       }}
                     >
-                      • {skill.name}
-                    </motion.li>
+                      {skill.name}
+                    </motion.span>
                   ))}
-                </motion.ul>
+                </motion.div>
               </motion.div>
             </motion.div>
 
             <motion.div 
-              className="flex flex-wrap gap-3 pt-4 justify-center md:justify-start"
+              className="pt-8"
               variants={itemVariants}
             >
-              {softSkills.map((skill, index) => (
-                <motion.span
-                  key={skill.name}
-                  className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ 
-                    scale: 1.05,
-                    backgroundColor: "rgba(59, 130, 246, 0.3)",
-                    borderColor: "rgba(59, 130, 246, 0.5)",
-                    color: "#ffffff"
-                  }}
-                >
-                  {skill.name}
-                </motion.span>
-              ))}
+              <motion.h4 
+                className="font-semibold text-green-400 text-lg mb-4 text-center md:text-left"
+              >
+                Soft Skills
+              </motion.h4>
+              <motion.div 
+                className="flex flex-wrap gap-3 justify-center md:justify-start"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1
+                    }
+                  }
+                }}
+              >
+                {softSkills.map((skill) => (
+                  <motion.span
+                    key={skill.name}
+                    className="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30"
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.8 },
+                      visible: { opacity: 1, scale: 1 }
+                    }}
+                    whileHover={{ 
+                      scale: 1.05,
+                      backgroundColor: "rgba(34, 197, 94, 0.3)",
+                      borderColor: "rgba(34, 197, 94, 0.5)",
+                      color: "#ffffff"
+                    }}
+                  >
+                    {skill.name}
+                  </motion.span>
+                ))}
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

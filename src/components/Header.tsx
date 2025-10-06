@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Logo from './ui/Logo'
 import { scrollToSection, navigationItems } from '../utils/common'
 
 const Header = () => {
@@ -62,9 +63,9 @@ const Header = () => {
           >
             <motion.button 
               onClick={() => handleNavClick('hero')}
-              className="text-xl font-semibold bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-cyan-300 transition-all duration-300"
+              className="flex items-center gap-3"
             >
-              Irene Monzon
+              <Logo size={40} />
             </motion.button>
           </motion.div>
 

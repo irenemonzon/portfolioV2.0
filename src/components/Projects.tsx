@@ -35,29 +35,20 @@ const Projects = () => {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-br from-blue-600/80 to-purple-600/80"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.div 
-                    className="absolute inset-0 flex items-center justify-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <span className="text-white font-semibold text-lg">Project Preview</span>
-                  </motion.div>
-                  <motion.div
-                    className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm rounded-full p-2"
-                    whileHover={{ 
-                      scale: 1.1,
-                      backgroundColor: "rgba(255, 255, 255, 0.2)"
-                    }}
-                  >
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </motion.div>
+                <div className="relative overflow-hidden rounded-t-xl border-b border-slate-700/30 h-48 md:h-56 lg:h-64 bg-slate-900/10">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} preview`}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: project.focalPoint ?? 'center' }}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-800 flex items-center justify-center">
+                      <span className="text-sm text-gray-400">No preview</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col">

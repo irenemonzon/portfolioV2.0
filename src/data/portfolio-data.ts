@@ -26,6 +26,7 @@ export interface Project {
   githubUrl?: string
   liveUrl?: string
   image?: string
+  focalPoint?: string
   features: string[]
   adminUrl?:string
   ordersUrl?:string
@@ -98,7 +99,8 @@ export const portfolioData = {
       id: 1,
       title: "E-commerce Platform",
       description: "A full-featured e-commerce application built with Next.js and Tailwind CSS. Features include product catalog, shopping cart, user authentication, and responsive design with ShadCN UI components.",
-      image: "/api/placeholder/400/250",
+  image: "/eccomerce_shop.png",
+  focalPoint: 'top',
       technologies: ["Next.js", "Tailwind CSS", "ShadCN", "TypeScript", "React"],
       liveUrl: "https://next-js-eccomerce-woad.vercel.app/",
       githubUrl: "https://github.com/irenemonzon/Next.js_Eccomerce",
@@ -113,7 +115,8 @@ export const portfolioData = {
       id: 2,
       title: "Coffee Shop Management System",
       description: "A comprehensive restaurant/coffee shop application with order management, admin panel, and customer interface. Built with modern Next.js features including Server Actions and App Router.",
-      image: "/api/placeholder/400/250",
+  image: "/coffe_shop.png",
+  focalPoint: 'top',
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Zustand", "Zod"],
       liveUrl: "https://restaurant-shop.vercel.app/",
       githubUrl: "https://github.com/irenemonzon/Restaurant-shop",
@@ -129,16 +132,16 @@ export const portfolioData = {
       id: 3,
       title: "Fitness Club Landing Page",
       description: "A modern, responsive landing page designed for fitness clubs, showcasing amenities and services to attract new members and keep existing ones engaged.",
-      image: "/api/placeholder/400/250",
+      image: "/fitness_club.png",
+      focalPoint: 'top',
       technologies: ["JavaScript", "CSS", "Responsive", "HTML"],
-      liveUrl: "https://irenemonzon.github.io/FitnessClub/",
+      liveUrl: "https://fitnessclubim.netlify.app",
       githubUrl: "https://github.com/irenemonzon/FitnessClub",
       features: [
-        "Advanced order tracking",
-        "Inventory management",
-        "Analytics and reporting",
-        "Modern admin interface",
-        "Database optimization"
+        "Class schedule with booking and availability",
+        "Trainer profiles and online booking",
+        "Membership and pricing plans",
+        "Contact"
       ]
     }
   ]as Project[],

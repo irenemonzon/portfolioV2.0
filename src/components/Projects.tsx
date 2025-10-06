@@ -27,7 +27,7 @@ const Projects = () => {
             {projects.map((project) => (
               <motion.div 
                 key={project.id} 
-                className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden group"
+                className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-2xl overflow-hidden group flex flex-col h-full"
                 variants={cardVariants}
                 whileHover={{ 
                   y: -10,
@@ -60,7 +60,7 @@ const Projects = () => {
                   </motion.div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <motion.h3 
                     className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors"
                     whileHover={{ x: 5 }}
@@ -83,18 +83,19 @@ const Projects = () => {
                   >
                     {project.technologies.map((tech, index) => (
                       <motion.span
-                        key={index}
-                        className="px-2 py-1 bg-slate-700/50 text-gray-300 text-xs rounded-md border border-slate-600/30"
-                        variants={scaleVariants}
-                        whileHover={{ 
-                          scale: 1.05,
-                          backgroundColor: "rgba(59, 130, 246, 0.2)",
-                          borderColor: "rgba(59, 130, 246, 0.4)",
-                          color: "#ffffff"
-                        }}
-                      >
-                        {tech}
-                      </motion.span>
+                          key={index}
+                          className="px-2 py-1 bg-slate-700/50 text-gray-300 text-xs rounded-md border border-slate-600/30"
+                          style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', borderColor: 'rgba(148, 163, 184, 0.18)' }}
+                          variants={scaleVariants}
+                          whileHover={{ 
+                            scale: 1.05,
+                            backgroundColor: "rgba(59, 130, 246, 0.2)",
+                            borderColor: "rgba(59, 130, 246, 0.4)",
+                            color: "#ffffff"
+                          }}
+                        >
+                          {tech}
+                        </motion.span>
                     ))}
                   </motion.div>
 
@@ -107,24 +108,18 @@ const Projects = () => {
                     <h4 className="text-sm font-semibold text-blue-400 mb-2">Key Features:</h4>
                     <ul className="text-xs text-gray-400 space-y-1">
                       {project.features.slice(0, 3).map((feature, index) => (
-                        <motion.li 
+                        <li 
                           key={index}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          whileHover={{ 
-                            x: 5,
-                            color: "#9ca3af"
-                          }}
+                         
                         >
                           • {feature}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </motion.div>
 
                   <motion.div 
-                    className="flex flex-col gap-2"
+                    className="flex flex-col gap-2 mt-auto"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}

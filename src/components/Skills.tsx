@@ -14,6 +14,7 @@ import {
   SiPostgresql,
   SiMongodb,
   SiFirebase,
+  SiAmazon,
   SiGit,
   SiGithub,
   SiDocker,
@@ -25,6 +26,7 @@ import {
 import { getSkillsByCategory } from "../data/portfolio-data";
 import SectionHeader from './ui/SectionHeader'
 import { containerVariants, cardVariants, scaleVariants } from './ui/animations'
+import ApiIcon from './ui/ApiIcon'
 
 const brandColors: Record<string, string> = {
   react: "#61DAFB",
@@ -37,7 +39,8 @@ const brandColors: Record<string, string> = {
   "node.js": "#339933",
   "express.js": "#ffffff",
   graphql: "#E10098",
-  "rest apis": "#ffffff",
+  "rest apis": "#00B4D8",
+  aws: "#FF9900",
   postgresql: "#336791",
   mongodb: "#47A248",
   firebase: "#FFCA28",
@@ -65,7 +68,8 @@ const icons: Record<string, IconType> = {
   "node.js": SiNodedotjs,
   "express.js": SiExpress,
   graphql: SiGraphql,
-  "rest apis": SiExpress,
+  "rest apis": ApiIcon,
+  aws: SiAmazon,
   postgresql: SiPostgresql,
   mongodb: SiMongodb,
   firebase: SiFirebase,
@@ -142,7 +146,7 @@ export default function Skills() {
           />
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 xl:grid-cols-4 gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -173,6 +177,7 @@ export default function Skills() {
                     <motion.div
                       key={j}
                       className="flex flex-col items-center p-4 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600/30"
+                      style={{ backgroundColor: 'rgba(30, 41, 59, 0.3)', borderColor: 'rgba(148, 163, 184, 0.18)' }}
                       variants={scaleVariants}
                       whileHover={{ 
                         scale: 1.05,

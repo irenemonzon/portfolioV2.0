@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser'
 import SectionHeader from './ui/SectionHeader'
 import Button from './ui/Button'
 import SocialIcons from './ui/SocialIcons'
 import { containerVariants, itemVariants } from './ui/animations'
+import Toast from './ui/Toast'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -22,9 +24,46 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Thank you for your message! I'll get back to you soon.");
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      to_email: 'irene.monzonm@gmail.com'
+    }
+
+  
+    if (serviceId && templateId && publicKey) {
+      emailjs.send(serviceId as string, templateId as string, templateParams, publicKey as string)
+        .then(() => {
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setShowToast(true)
+        })
+        .catch(() => {
+          setShowToast(true)
+        })
+      return
+    }
+
+   
+    const to = 'irene.monzonm@gmail.com'
+    const subject = encodeURIComponent(formData.subject || 'Contact from website')
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)
+    const mailto = `mailto:${to}?subject=${subject}&body=${body}`
+
+   
+    window.location.href = mailto
+
+    
     setFormData({ name: "", email: "", subject: "", message: "" });
+    setShowToast(true)
   };
+
+  const [showToast, setShowToast] = useState(false)
 
   return (
     <section id="contact" className="py-20 bg-slate-900">
@@ -72,7 +111,6 @@ const Contact = () => {
                 animated={true}
               />
 
-              {/* What I can help with */}
               <motion.div variants={itemVariants} className="pt-6">
                 <h4 className="font-semibold text-white mb-3">
                   What I can help you with:
@@ -146,6 +184,12 @@ const Contact = () => {
           </motion.div>
         </motion.div>
       </div>
+      {showToast && (
+        <Toast
+          message="Message prepared in your mail client — please send from there."
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </section>
   );
 };

@@ -48,6 +48,7 @@ const About = () => {
             >
               <motion.div 
                 className="space-y-3 p-5 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                style={{ backgroundColor: 'rgba(30, 41, 59, 0.3)', borderColor: 'rgba(148, 163, 184, 0.18)' }}
                 whileHover={{ 
                   scale: 1.02,
                   backgroundColor: "rgba(30, 41, 59, 0.5)",
@@ -76,6 +77,7 @@ const About = () => {
                     <motion.span
                       key={skill.name}
                       className="px-3 py-1.5 bg-blue-500/20 text-blue-300 rounded-md text-sm border border-blue-500/30"
+                      style={{ backgroundColor: 'rgba(59,130,246,0.2)', borderColor: 'rgba(59,130,246,0.3)' }}
                       variants={{
                         hidden: { opacity: 0, scale: 0.8 },
                         visible: { opacity: 1, scale: 1 }
@@ -93,8 +95,9 @@ const About = () => {
                 </motion.div>
               </motion.div>
 
-              <motion.div 
+                <motion.div 
                 className="space-y-3 p-5 rounded-lg bg-slate-700/30 border border-slate-600/30"
+                style={{ backgroundColor: 'rgba(30, 41, 59, 0.3)', borderColor: 'rgba(148, 163, 184, 0.18)' }}
                 whileHover={{ 
                   scale: 1.02,
                   backgroundColor: "rgba(30, 41, 59, 0.5)",
@@ -123,6 +126,7 @@ const About = () => {
                     <motion.span
                       key={skill.name}
                       className="px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-md text-sm border border-purple-500/30"
+                      style={{ backgroundColor: 'rgba(147,51,234,0.2)', borderColor: 'rgba(147,51,234,0.3)' }}
                       variants={{
                         hidden: { opacity: 0, scale: 0.8 },
                         visible: { opacity: 1, scale: 1 }
@@ -141,8 +145,8 @@ const About = () => {
               </motion.div>
             </motion.div>
 
-            <motion.div 
-              className="pt-8"
+                <motion.div 
+                  className="pt-8"
               variants={itemVariants}
             >
               <motion.h4 
@@ -150,7 +154,7 @@ const About = () => {
               >
                 Soft Skills
               </motion.h4>
-              <motion.div 
+                <motion.div 
                 className="flex flex-wrap gap-3 justify-center md:justify-start"
                 variants={{
                   hidden: {},
@@ -165,6 +169,7 @@ const About = () => {
                   <motion.span
                     key={skill.name}
                     className="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm border border-green-500/30"
+                    style={{ backgroundColor: 'rgba(34,197,94,0.2)', borderColor: 'rgba(34,197,94,0.3)' }}
                     variants={{
                       hidden: { opacity: 0, scale: 0.8 },
                       visible: { opacity: 1, scale: 1 }

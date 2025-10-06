@@ -201,43 +201,6 @@ export default function Skills() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Soft Skills */}
-          <motion.div 
-            className="mt-16 text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
-            <motion.h3 
-              className="text-xl font-semibold text-white mb-6"
-              variants={cardVariants}
-            >
-              Soft Skills & Methodologies
-            </motion.h3>
-            <motion.div 
-              className="flex flex-wrap justify-center gap-3"
-              variants={containerVariants}
-            >
-              {getSkillsByCategory("Soft Skills").map((skill, i) => (
-                <motion.span
-                  key={i}
-                  className="px-4 py-2 bg-slate-700/30 border border-slate-600/30 rounded-full text-sm text-gray-300 backdrop-blur-sm"
-                  variants={scaleVariants}
-                  whileHover={{ 
-                    scale: 1.05,
-                    backgroundColor: "rgba(59, 130, 246, 0.2)",
-                    borderColor: "rgba(59, 130, 246, 0.4)",
-                    color: "#ffffff"
-                  }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {skill.name}
-                </motion.span>
-              ))}
-            </motion.div>
-          </motion.div>
         </div>
       </div>
     </section>

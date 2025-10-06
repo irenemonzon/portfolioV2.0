@@ -41,9 +41,9 @@ export interface ContactInfo {
 export const portfolioData = {
   personal: {
       name: "Irene Monzon",
-      title: "Frontend Developer",
+      title: "FullStack Developer",
       description:
-        "Frontend Developer creating modern, responsive, and user-friendly web applications with React, Next.js, JavaScript and TypeScript.",
+        "FullStack Developer creating modern, responsive, and user-friendly web applications with React, Next.js, JavaScript, TypeScript and Node.js.",
       initials: "IM",
       profileImage: "./profile.png",
   } as PersonalInfo,
@@ -101,7 +101,7 @@ export const portfolioData = {
       description: "A full-featured e-commerce application built with Next.js and Tailwind CSS. Features include product catalog, shopping cart, user authentication, and responsive design with ShadCN UI components.",
   image: "/eccomerce_shop.png",
   focalPoint: 'top',
-      technologies: ["Next.js", "Tailwind CSS", "ShadCN", "TypeScript", "React"],
+      technologies: ["Next.js", "Tailwind CSS", "ShadCN", "TypeScript", "React","PostgreSQL"],
       liveUrl: "https://next-js-eccomerce-woad.vercel.app/",
       githubUrl: "https://github.com/irenemonzon/Next.js_Eccomerce",
       features: [
@@ -117,7 +117,7 @@ export const portfolioData = {
       description: "A comprehensive restaurant/coffee shop application with order management, admin panel, and customer interface. Built with modern Next.js features including Server Actions and App Router.",
   image: "/coffe_shop.png",
   focalPoint: 'top',
-      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Zustand", "Zod"],
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "Zustand", "Zod", "PostgreSQL"],
       liveUrl: "https://restaurant-shop.vercel.app/",
       githubUrl: "https://github.com/irenemonzon/Restaurant-shop",
       features: [
@@ -151,7 +151,7 @@ export const portfolioData = {
 
   about: {
   intro:
-    "I'm a Frontend Developer with +5 years of experience building fast, high-quality websites and web apps. I work with modern tools like React, Next.js, JavaScript and TypeScript to create clean, responsive, and easy-to-use interfaces.",
+    "I'm a FullStack Developer with +5 years of experience building fast, high-quality websites and web apps. I work with modern tools like React, Next.js, JavaScript and TypeScript to create clean, responsive, and easy-to-use interfaces.",
   background:
     "My experience spans from developing intuitive, accessible frontends to collaborating on backend integrations using Node.js, Express, and databases like PostgreSQL, MongoDB, and Firebase. I’m passionate about writing maintainable code, optimizing user experience, and continuously learning to stay at the forefront of web development trends.",
   interests: ["Web Development", "FullStack", "Continuous Learning", "Problem Solving"],

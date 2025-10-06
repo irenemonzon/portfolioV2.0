@@ -112,7 +112,7 @@ const Hero = () => {
 
           <motion.div className="mb-12" variants={itemVariants}>
             <p className="text-xl md:text-2xl lg:text-3xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
-              Frontend Developer specializing in modern web technologies like{" "}
+              FullStack Developer specializing in modern web technologies like{" "}
               <span className="text-blue-400 font-semibold">React</span>,{" "}
               <span className="text-green-400 font-semibold">Next.js</span>, and{" "}
               <span className="text-purple-400 font-semibold">TypeScript</span>

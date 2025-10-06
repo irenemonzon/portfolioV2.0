@@ -120,8 +120,6 @@ const Contact = () => {
                   <li>• React and Next.js applications</li>
                   <li>• E-commerce solutions</li>
                   <li>• Database design and optimization</li>
-                  <li>• UI/UX implementation</li>
-                  <li>• Technical consultation</li>
                 </ul>
               </motion.div>
             </motion.div>

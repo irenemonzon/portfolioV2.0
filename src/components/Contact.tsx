@@ -29,10 +29,13 @@ const Contact = () => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      subject: formData.subject,
+  
+      email: formData.email,
+      title: formData.subject || 'Contact Us',
+      name: formData.name,
+      time: new Date().toLocaleString(),
       message: formData.message,
+      reply_to: formData.email,
       to_email: 'irene.monzonm@gmail.com'
     }
 
@@ -184,7 +187,7 @@ const Contact = () => {
       </div>
       {showToast && (
         <Toast
-          message="Message prepared in your mail client — please send from there."
+          message="Message sent successfully."
           onClose={() => setShowToast(false)}
         />
       )}
